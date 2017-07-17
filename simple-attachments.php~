@@ -134,8 +134,17 @@ $postid=$_POST["postid"];
 foreach ($listaid as $id) {
 	
 	
-// Update the post into the database
+/* $invia=$wpdb->update($wpdb->posts, array('post_parent'=>$postid, array('id'=>$id, 'post_type'=>'attachment')));
 
+  $my_post = array(
+     'ID'           => $id,
+      'post_parent'   => $postid,
+     
+  );
+
+// Update the post into the database
+  wp_update_post( $my_post, true );
+exit( var_dump( $wpdb->last_query ) );*/
 
 $attached = $wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET post_parent = ".$postid." WHERE post_type = 'attachment' AND ID IN ( $id )", $postid ) );
 echo( var_dump( $wpdb->last_query ) );
